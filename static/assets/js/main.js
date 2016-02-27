@@ -164,6 +164,8 @@
 							// Show message.
 								$message._show('success', 'Thank you!');
 								//$message._show('failure', 'Something went wrong. Please try again.');
+								window.location.href = "stat.html";
+
 
 						}, 750);
 
