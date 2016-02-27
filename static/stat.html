@@ -7,6 +7,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
+
+
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	</head>
@@ -47,19 +49,21 @@
 		}  /*This is styling for the D3*/
 
 	</style>
-
-
-	<body>
-
 		<!-- Header -->
 			<header id="header">
-			<h1>Welcome, Judy</h1>
+			</header></br>
 
-			</header>
+	<body scroll="no" scrolling="no">
 
-			<div id='welcome' align="center">  
+			<div id="user" align="center">
+				<h1>Welcome, Judy</h1>
 			</div>
 			</br>
+
+<!-- 			<div id='welcome' align="center">  
+
+			</div>
+			</br> -->
 
 
 
@@ -78,15 +82,30 @@
 	
 			</br>
 
+			<div id='titles' align="center">  
+				<div class="summarytable">
+					 <table class="head">
+					        <tr>
+					            <td><h2>Product</h2></td>
+					            <td><h2>Amount Paid</h2></td>
+					            <td><h2>Date</h2></td>
+					        </tr>
+					    </table>
+				</div>
+			</div>
+
 			<div id='categories' align="center">  
-			
+				<div class="summarytable">
+					 <table class="head">
+					    </table>
+					<table id="mytable"></table>
+				</div>
 			</div>
 
 
 
-
 		<!-- Scripts -->
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<!-- [if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif] -->
 			<script src="assets/js/main.js"></script>
 
 			<!-- These are the scripts to make D3 work.  Will need editing.  I changed the text color so far to show on our layout -->
@@ -304,9 +323,23 @@
 			<script>
 				
 				$.getJSON('http://127.0.0.1:5000/cache', function(data) {
-    					//data is the JSON string
-    					console.log(data)
+    
+        					$.each(data, function(i, item) {
+	    					$row = $('<tr></tr>');
+	    					$row.append('<td>' + item.name + '</td>');
+						$row.append('<td>' + item.price + '</td>');
+						$row.append('<td>' + item.date + '</td>');
+
+						// repeat the above line for each data item
+
+						$('#mytable').append($row);
+					})
+
+
+    					console.log(data[0].name)
 				});
+
+
 				var freqData=[
 				{State:'AL',freq:{low:9000, mid:1319, high:249}}
 				,{State:'AZ',freq:{low:1101, mid:412, high:674}}
@@ -323,8 +356,9 @@
 				dashboard('#dashboard',freqData);
 			</script>
 
+	</body>
 
-			<!-- Footer -->
+				<!-- Footer -->
 			<footer id="footer">
 				<ul class="icons">
 					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -335,7 +369,5 @@
 					<li>&copy; flex </br>Made with 💗at VT Hacks III </li><li></br>John Purviance | Jayanth Prathipati | Oliver Ebeling-Koning | Dag Yeshiwas</li>
 				</ul>
 			</footer>
-
-	</body>
 
 </html>

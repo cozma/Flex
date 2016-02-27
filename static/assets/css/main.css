@@ -15,7 +15,7 @@
 	}
 
 	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-		display: block;
+		/**/
 	}
 
 	body {
@@ -41,7 +41,7 @@
 	}
 
 	body {
-		-webkit-text-size-adjust: none;
+		/*-webkit-text-size-adjust: none;*/
 	}
 
 /* Box Model */
@@ -59,7 +59,7 @@
 	}
 
 	body {
-		-ms-overflow-style: scrollbar;
+		/*-ms-overflow-style: scrollbar;*/
 	}
 
 	@media screen and (max-width: 480px) {
@@ -72,15 +72,18 @@
 
 	html, body {
 		height: 100%;
-		overflow-x: hidden;
+		overflow-x: auto;
+		overflow-y: auto;
+
 		width: 100%;
 	}
 
 		@media screen and (max-height: 640px) {
 
 			html, body {
-				height: auto;
+				/*height: auto;*/
 				min-height: 100%;
+				overflow: auto;
 			}
 
 		}
@@ -103,7 +106,7 @@
 	}
 
 		body > * {
-			position: relative;
+			overflow: auto;
 			z-index: 2;
 		}
 
@@ -162,14 +165,46 @@
 			float: right;
 		}
 
+		table 
+		{
+		    table-layout:fixed;
+		    width:100%;
+		    height: 100%;
+		    overflow-y: auto;
+
+		}
+
+		.summaryTable
+		{
+			height:440px;
+			width:215px;
+			/* background-color:#CCC; */		
+		        	overflow-y:auto;
+			position:relative;
+			margin-left:-5px;
+		}
 
 		/*LOGO*/
 		#logo {
 			max-width: 25%;
 		}
 
+		#mytable {
+			max-height: 500px;
+		}
 
-		#welcome {
+
+		#user {
+
+			/*padding: 10px;*/
+			min-height: 50px;
+			overflow: hidden;
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  			font-weight: 300;
+
+    		}
+
+    		#welcome {
 			background-color: rgba(149, 189, 221, 0.6);
 			-moz-box-shadow: 1px 20px 10px rgba(0, 0, 0,0.5);
 			-webkit-box-shadow: 1px 20px 10px rgba(0, 0, 0, .5);
@@ -185,8 +220,9 @@
 			-moz-box-shadow: 1px 20px 10px rgba(0, 0, 0,0.5);
 			-webkit-box-shadow: 1px 20px 10px rgba(0, 0, 0, .5);
 			box-shadow: 5px 5px 10px rgba(0, 0, 0, .5);
-			padding: 10px;
-			padding-bottom: 30px;
+			/*padding: 10px;*/
+			min-height: 300px;
+			overflow: hidden;
 
     		}
 
@@ -199,6 +235,8 @@
 			padding-top: 10px;
 			padding-right: 10px;
 			padding-left: 10px;
+			min-height: 50px;
+			overflow: hidden;
 
     		}
 
@@ -210,7 +248,21 @@
 			-webkit-box-shadow: 1px 20px 10px rgba(0, 0, 0, .5);
 			box-shadow: 5px 5px 10px rgba(0, 0, 0, .5);
 			padding: 10px;
+			max-height: 500px;
+			table-layout: fixed;
+			min-height: 300px;
+    		}
 
+
+
+    		/*CATEGORIES*/
+		#titles {
+			background-color: rgba(0, 150, 136, 0.6);
+			padding: 10px;
+			max-height: 500px;
+			table-layout: fixed;
+			min-height: 50px;
+			overflow: hidden;
     		}
 
     		 
@@ -256,6 +308,7 @@
 				opacity: 1;
 				visibility: visible;
 				z-index: 1;
+				min-width: 100%;
 			}
 
 				#bg div.visible.top {
@@ -454,6 +507,8 @@
 	h1 {
 		font-size: 2.5em;
 		line-height: 1.25em;
+		display: inline;
+
 	}
 
 	h2 {
@@ -511,17 +566,19 @@
 	}
 
 	pre {
-		-webkit-overflow-scrolling: touch;
+		/*-webkit-overflow-scrolling: touch;*/
 		font-family: "Courier New", monospace;
 		font-size: 0.9em;
 		margin: 0 0 2em 0;
 	}
 
 		pre code {
-			display: block;
+			
 			line-height: 1.75em;
 			padding: 1em 1.5em;
 			overflow-x: auto;
+			overflow-y: auto;
+
 		}
 
 	hr {
@@ -717,7 +774,7 @@
 
 	label {
 		color: #fff;
-		display: block;
+		
 		font-size: 0.9em;
 		font-weight: 700;
 		margin: 0 0 1em 0;
@@ -837,7 +894,7 @@
 		border: none;
 		border: solid 2px rgba(255, 255, 255, 0.35);
 		color: inherit;
-		display: block;
+		
 		outline: 0;
 		padding: 0 1em;
 		text-decoration: none;
@@ -867,7 +924,7 @@
 
 	.select-wrapper {
 		text-decoration: none;
-		display: block;
+		
 		position: relative;
 	}
 
@@ -883,7 +940,7 @@
 		.select-wrapper:before {
 			color: rgba(255, 255, 255, 0.35);
 			content: '\f078';
-			display: block;
+			
 			height: 2.75em;
 			line-height: 2.75em;
 			pointer-events: none;
@@ -915,7 +972,7 @@
 		-webkit-appearance: none;
 		-ms-appearance: none;
 		appearance: none;
-		display: block;
+		
 		float: left;
 		margin-right: -2em;
 		opacity: 0;
@@ -1080,6 +1137,9 @@
 		}
 
 /* Header */
+	#header {
+		min-height: 200px;
+	}
 
 	#header h1 {
 		font-size: 3.25em;
@@ -1087,6 +1147,7 @@
 		text-align: center;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   		font-weight: 300;
+  		min-height: 100px;
 	}
 
 	#header p {
@@ -1113,7 +1174,7 @@
 	@media screen and (max-width: 480px) {
 
 		#header {
-			margin: 0 0 1em 0;
+			margin: 0 0h 1em 0;
 		}
 
 	}
@@ -1180,6 +1241,7 @@
 	#footer {
 /*		background: #f0f0f0;
 */		padding: 4em 0 6em 0;
+		overflow: hidden;
 /*		text-align: center;
 */	}
 
