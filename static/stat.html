@@ -92,6 +92,7 @@
 			<!-- These are the scripts to make D3 work.  Will need editing.  I changed the text color so far to show on our layout -->
 
 			<script src="http://d3js.org/d3.v3.min.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 			<script>
 				var xmlhttp = new XMLHttpRequest();
 				var url = "/cache";
@@ -100,6 +101,8 @@
 			</script>
 
 			<script>
+				function convC1Data(id, statData) {
+				}
 				function dashboard(id, fData){
 				    var barColor = 'steelblue';
 				    function segColor(c){ return {low:"#807dba", mid:"#e08214",high:"#41ab5d"}[c]; }
@@ -299,6 +302,11 @@
 			</script>
 
 			<script>
+				
+				$.getJSON('http://127.0.0.1:5000/cache', function(data) {
+    					//data is the JSON string
+    					console.log(data)
+				});
 				var freqData=[
 				{State:'AL',freq:{low:9000, mid:1319, high:249}}
 				,{State:'AZ',freq:{low:1101, mid:412, high:674}}
