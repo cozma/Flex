@@ -106,7 +106,7 @@
 
 				        // Add x-axis to the histogram svg.
 				        hGsvg.append("g").attr("class", "x axis")
-				            .attr("transform", "translate(0," + hGDim.h + ")")
+				            .attr("transform", "translate(0," + hGDim.h + ")").attr("fill", "white")
 				            .call(d3.svg.axis().scale(x).orient("bottom"));
 
 				        // Create function for y-axis map.
@@ -281,7 +281,7 @@
 
 			<script>
 				var freqData=[
-				{State:'AL',freq:{low:4786, mid:1319, high:249}}
+				{State:'AL',freq:{low:9000, mid:1319, high:249}}
 				,{State:'AZ',freq:{low:1101, mid:412, high:674}}
 				,{State:'CT',freq:{low:932, mid:2149, high:418}}
 				,{State:'DE',freq:{low:832, mid:1152, high:1862}}
