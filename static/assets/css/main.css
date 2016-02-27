@@ -149,10 +149,10 @@
 /* BG */
 
 	#bg {
-		-moz-transition: opacity 2s ease-in-out;
-		-webkit-transition: opacity 2s ease-in-out;
-		-ms-transition: opacity 2s ease-in-out;
-		transition: opacity 2s ease-in-out;
+		-moz-transition: opacity 0.75s ease-in-out;
+		-webkit-transition: opacity 0.75s ease-in-out;
+		-ms-transition: opacity 0.75s ease-in-out;
+		transition: opacity 0.75s ease-in-out;
 		height: 100%;
 		left: 0;
 		opacity: 0.75;
@@ -164,10 +164,10 @@
 	}
 
 		#bg div {
-			-moz-transition: opacity 10s ease, visibility 10s;
-			-webkit-transition: opacity 10s ease, visibility 10s;
-			-ms-transition: opacity 10s ease, visibility 10s;
-			transition: opacity 10s ease, visibility 10s;
+			-moz-transition: opacity 5s ease, visibility 5s;
+			-webkit-transition: opacity 5s ease, visibility 5s;
+			-ms-transition: opacity 5s ease, visibility 5s;
+			transition: opacity 5s ease, visibility 5s;
 			background-size: cover;
 			height: 100%;
 			left: 0;
@@ -179,10 +179,10 @@
 		}
 
 			#bg div.visible {
-				-moz-animation: bg 45s linear infinite;
-				-webkit-animation: bg 45s linear infinite;
-				-ms-animation: bg 45s linear infinite;
-				animation: bg 45s linear infinite;
+				-moz-animation: bg 15s linear infinite;
+				-webkit-animation: bg 15s linear infinite;
+				-ms-animation: bg 15s linear infinite;
+				animation: bg 15s linear infinite;
 				opacity: 1;
 				visibility: visible;
 				z-index: 1;

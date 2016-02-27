@@ -4,9 +4,11 @@
 import requests
 import json
 from dataScraping.createdictionary import getStoreMapDatabase
+import csv
 
-customerId = '56c66be5a73e4927415073f1'
-apiKey = 'f2074f6de40823eda9cf1a33f0d23279'
+
+customerId = '56c66be5a73e4927415073da'
+apiKey = '52da742eb132c5000831254a4002207a'
 
 # Sorted data. This is a list of lists of maps (mapping a store name to a tuple (amount, category)) where the list is all the categories and the maps are the {place:charge} for the category
 # It is a pain but it will be dynamic if we add more categores
@@ -39,6 +41,7 @@ def getAllDataAndSort():
     storeMapDatabase = getStoreMapDatabase()
     possibleCategories = list(set(storeMapDatabase.values()))
 
+
     # Double check that all the stores we are claiming someone purchased from are in our database
     for storePurchasedFrom in storeMapPurchasedFrom:
         if not storePurchasedFrom.lower() in (key.lower() for key in storeMapDatabase.keys()):
@@ -57,7 +60,35 @@ def getAllDataAndSort():
                         arbitraryCounter = arbitraryCounter+1
         SORTED_DATA.append(storesInCurrentCategory)
 
-
 if __name__=="__main__":
-    getAllDataAndSort()
-    print SORTED_DATA
+    # getAllDataAndSort()
+    # print json.dumps(SORTED_DATA, ensure_ascii=False)
+    #
+    lst = getStoreMapDatabase()
+    merchantMatrix = []
+    for store in lst:
+
+
+        if store[0] != chr(0xff):
+            url = 'http://api.reimaginebanking.com/merchants?key={}'.format(apiKey)
+            payload = {
+            "name": store,
+            "category": lst[store]
+            }
+            # add a merchant
+            response = requests.post(
+            url,
+            data=json.dumps(payload),
+            headers={'content-type':'application/json'},
+                )
+
+            if(response.status_code == 201):
+                merchantMatrix.append({"store": store, "id": response.json()['objectCreated']['_id'], "category":lst[store]})
+
+    keys = merchantMatrix[0].keys()
+    with open('dict.csv', 'wb') as output_file:
+        dict_writer = csv.DictWriter(output_file, keys)
+        dict_writer.writeheader()
+        dict_writer.writerows(merchantMatrix)
+
+    
