@@ -19,7 +19,7 @@ def sortAllPurchases(allPurchases):
     for purchase in allPurchases:
         possibleCategories.append(purchase['description'])
     possibleCategories = list(set(possibleCategories))
-    # Create mapping to categories "food", "online", or "retail" 
+    # Create mapping to categories "food", "online", or "retail"
     subcategoryMappingToCategory = {"fastFood":"food", \
                                     "apparelOnline":"online", \
                                     "electronicsOnline":"online", \
@@ -67,18 +67,15 @@ def getAllPurchase():
     retList = []
     if response.status_code == 200:
         conv = response.json()
-    print "requesting purchases"
-        for ii, con in enumerate(conv):
-            url = 'http://api.reimaginebanking.com/merchants/{}?key={}'.format(con['merchant_id'],apiKey)
-            response = requests.get(url)
-            time.sleep(0.05)
-            sys.stdout.write("Got %d out of %d purchases" % (ii, len(conv)))
-            name = response.json()['name'].replace("\x00", "")
-            retList.append({"id" : con['merchant_id'], "description" : con['description'],
-                              "name": name, "date":con['purchase_date'],
-                              "price":con['amount'] })
-    print ""
-    return sortAllPurchases(json.dumps(retList))
+    for ii, con in enumerate(conv):
+        url = 'http://api.reimaginebanking.com/merchants/{}?key={}'.format(con['merchant_id'],apiKey)
+        response = requests.get(url)
+        name = response.json()['name'].replace("\x00", "")
+        retList.append({"id" : con['merchant_id'], "description" : con['description'],
+                          "name": name, "date":con['purchase_date'],
+                          "price":con['amount'] })
+
+    sortAllPurchases(retList)
 
 # getters for json data
 def getFood():
