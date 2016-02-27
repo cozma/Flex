@@ -209,7 +209,6 @@
 			-moz-box-shadow: 1px 20px 10px rgba(0, 0, 0,0.5);
 			-webkit-box-shadow: 1px 20px 10px rgba(0, 0, 0, .5);
 			box-shadow: 5px 5px 10px rgba(0, 0, 0, .5);
-			padding: 10px;
 
     		}
 
@@ -260,7 +259,6 @@
 			-moz-box-shadow: 1px 20px 10px rgba(0, 0, 0,0.5);
 			-webkit-box-shadow: 1px 20px 10px rgba(0, 0, 0, .5);
 			box-shadow: 5px 5px 10px rgba(0, 0, 0, .5);
-			padding: 10px;
 			max-height: 500px;
 			table-layout: fixed;
 			min-height: 300px;
@@ -271,7 +269,6 @@
     		/*CATEGORIES*/
 		#titles {
 			background-color: rgba(0, 150, 136, 0.6);
-			padding: 10px;
 			max-height: 500px;
 			table-layout: fixed;
 			min-height: 50px;
