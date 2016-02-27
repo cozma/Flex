@@ -78,11 +78,14 @@ def getAllPurchase():
 
 # getters for json data
 def getFood():
-    return foodPurchases
+    getAllPurchase()
+    return json.dumps(foodPurchases)
 def getRetail():
-    return retailPurchases
+    getAllPurchase()
+    return json.dumps(retailPurchases)
 def getOnline():
-    return onlinePurchases
+    getAllPurchase()
+    return json.dumps(onlinePurchases)
 
 
 # TEST The stuff from the stats.json file
@@ -90,4 +93,4 @@ def getOnline():
 #     allData = json.load(data_file)
 #     sortAllPurchases(allData)
 # print getFood()
-getAllPurchase()
+# getAllPurchase()

@@ -93,12 +93,24 @@
 
 			<script src="http://d3js.org/d3.v3.min.js"></script>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-			<script>
+<!-- 			<script>
 				var xmlhttp = new XMLHttpRequest();
-				var url = "/cache";
+				var url = "/refresh_food";
 				xmlhttp.open("GET", url, true);
 				xmlhttp.send();
 			</script>
+			<script>
+				var xmlhttp = new XMLHttpRequest();
+				var url = "/refresh_retail";
+				xmlhttp.open("GET", url, true);
+				xmlhttp.send();
+			</script>
+			<script>
+				var xmlhttp = new XMLHttpRequest();
+				var url = "/refresh_online";
+				xmlhttp.open("GET", url, true);
+				xmlhttp.send();
+			</script> -->
 
 			<script>
 				function convC1Data(id, food, retail, online) {
@@ -435,7 +447,7 @@
 				var food = []
 				var retail = []
 				var online = []
-				$.getJSON('http://127.0.0.1:5000/cache', function(data) {
+				$.getJSON('/purchases', function(data) {
     					//data is the JSON string
     					
     					for(i = 0; i < data.length;i++) {
