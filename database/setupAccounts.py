@@ -20,9 +20,9 @@ def depositMoney(accountID, amountToPutIn):
     print response.json()
 
 
-def chargeToAccount(accountID, amountToCharge):
+def chargeToAccount(accountID, amountToCharge, payeeID):
     purchaseurl = 'http://api.reimaginebanking.com/accounts/' + accountID + '/purchases?key=' + apiKey
-    purchase = {"merchant_id": "56c66be6a73e492741507627","medium": "balance","purchase_date": "2016-02-27","amount": amountToCharge,"status": "pending","description": "string"}
+    purchase = {"merchant_id": payeeID,"medium": "balance","purchase_date": "2016-02-27","amount": amountToCharge,"status": "pending","description": "string"}
     response = requests.post(
 	    purchaseurl,
 	    data=json.dumps(purchase),
@@ -47,8 +47,11 @@ accountNum = card_list[0]['_id'] # Get the id number for the first account
 
 ###############################
 ##### Main deposits and charges
-chargeToAccount(accountNum, 200)
 depositMoney(accountNum, 5000)
+chargeToAccount(accountNum, 200, "56c66be6a73e492741507627")
+chargeToAccount(accountNum, 200, "56c66be6a73e492741507627")
+chargeToAccount(accountNum, 200, "56c66be6a73e492741507627")
+chargeToAccount(accountNum, 200, "56c66be6a73e492741507627")
    
 
 
