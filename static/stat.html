@@ -479,7 +479,7 @@
 			<script>
 				function category(cat){
 
-					$.getJSON('http://127.0.0.1:5000/cache', function(data) {
+					$.getJSON('/purchases', function(data) {
 
 					$('#mytable tr').remove();
 
@@ -501,7 +501,7 @@
 				}
 
 
-					$.getJSON('http://127.0.0.1:5000/cache', function(data) {
+					$.getJSON('/purchases', function(data) {
 
 					$('#mytable tr').remove();
 
