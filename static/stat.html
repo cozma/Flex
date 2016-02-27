@@ -79,6 +79,21 @@
 
 				<p id="tip">You could be saving $500.00 a month if you don't eat out!</p>
 			</div> 
+			</br>
+
+			<div id='buttons' align="center">
+				<tr>
+					<button class="button" onclick="category('fastFood')">Fast Food</button>
+					<button class="button" onclick="category('apparelOnline')">Apparel Online</button>
+					<button class="button" onclick="category('electronicsOnline')">Electronics Online</button>
+					<button class="button" onclick="category('generalMerchandiseOnline')">General Merchandise</button>
+					<button class="button" onclick="category('homeGoodsOnline')">Home Goods</button>
+					<button class="button" onclick="category('sportingGoodsOnline')">Sporting Goods</button>
+					<button class="button" onclick="category('hardware')">Hardware</button>
+					<button class="button" onclick="category('apparel')">Clothes</button>
+
+				</tr>
+			</div>
 	
 			</br>
 
@@ -321,23 +336,48 @@
 			</script>
 
 			<script>
-				
-				$.getJSON('http://127.0.0.1:5000/cache', function(data) {
+				function category(cat){
+
+					$.getJSON('http://127.0.0.1:5000/cache', function(data) {
+
+					$('#mytable tr').remove();
+
     
         					$.each(data, function(i, item) {
-	    					$row = $('<tr></tr>');
-	    					$row.append('<td>' + item.name + '</td>');
-						$row.append('<td>' + item.price + '</td>');
-						$row.append('<td>' + item.date + '</td>');
+        						if (item.description == cat){
+		    					$row = $('<tr></tr>');
+		    					$row.append('<td>' + item.name.charAt(0).toUpperCase() + item.name.slice(1) + '</td>');
+							$row.append('<td>' + "$" + parseInt(item.price).toFixed(2) + '</td>');
+							$row.append('<td>' + new Date(item.date) + '</td>');
 
-						// repeat the above line for each data item
+							// repeat the above line for each data item
 
-						$('#mytable').append($row);
+							$('#mytable').append($row);
+						}
 					})
 
+					});
+				}
 
-    					console.log(data[0].name)
-				});
+
+					$.getJSON('http://127.0.0.1:5000/cache', function(data) {
+
+					$('#mytable tr').remove();
+
+    
+        					$.each(data, function(i, item) {
+		    					$row = $('<tr></tr>');
+		    					$row.append('<td>' + item.name.charAt(0).toUpperCase() + item.name.slice(1) + '</td>');
+							$row.append('<td>' + "$" + parseInt(item.price).toFixed(2) + '</td>');
+							$row.append('<td>' + new Date(item.date) + '</td>');
+
+							// repeat the above line for each data item
+
+							$('#mytable').append($row);
+					})
+
+					});
+
 
 
 				var freqData=[
