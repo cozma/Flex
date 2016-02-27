@@ -80,6 +80,12 @@
 			<!-- These are the scripts to make D3 work.  Will need editing.  I changed the text color so far to show on our layout -->
 
 			<script src="http://d3js.org/d3.v3.min.js"></script>
+			<script>
+				var xmlhttp = new XMLHttpRequest();
+				var url = "/cache";
+				xmlhttp.open("GET", url, true);
+				xmlhttp.send();
+			</script>
 
 			<script>
 				function dashboard(id, fData){

@@ -35,7 +35,7 @@ def getAllPurchase():
             retList.append({"id" : con['merchant_id'], "description" : con['description'],
                               "name": name, "date":con['purchase_date'],
                               "price":con['amount'] })
-    return type(json.dumps(retList))
+    return json.dumps(retList)
 
 
 
