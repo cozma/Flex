@@ -5,6 +5,7 @@ import requests
 import json
 from dataScraping.createdictionary import getStoreMapDatabase
 import csv
+import random
 
 
 customerId = '56c66be5a73e4927415073da'
@@ -85,10 +86,54 @@ if __name__=="__main__":
             if(response.status_code == 201):
                 merchantMatrix.append({"store": store, "id": response.json()['objectCreated']['_id'], "category":lst[store]})
 
-    keys = merchantMatrix[0].keys()
-    with open('dict.csv', 'wb') as output_file:
-        dict_writer = csv.DictWriter(output_file, keys)
-        dict_writer.writeheader()
-        dict_writer.writerows(merchantMatrix)
+    # keys = merchantMatrix[0].keys()
+    # with open('dict.csv', 'wb') as output_file:
+    #     dict_writer = csv.DictWriter(output_file, keys)
+    #     dict_writer.writeheader()
+    #     dict_writer.writerows(merchantMatrix)
 
-    
+
+    accountsUrl = 'http://api.reimaginebanking.com/customers/{}/accounts?key={}'.format(customerId, apiKey)
+
+    response = requests.get(accountsUrl)
+
+    accounts = response.json()
+    id = ""
+    for account in accounts:
+        if(account['type'] == 'Credit Card'):
+            id = account['_id']
+            break
+
+
+
+    for i in range(0, 100):
+        merch = merchantMatrix[random.randint(0, len(merchantMatrix))]
+        price = random.uniform(1, 500)
+
+
+        purchase = {
+            "merchant_id": merch['id'],
+            "medium": "balance",
+            "purchase_date": "2016-02-27",
+            "amount": price,
+            "status": "pending",
+            "description": merch['category']
+        }
+
+        url = 'http://api.reimaginebanking.com/accounts/{}/purchases?key={}'.format(id,apiKey)
+        # Creates a purchase
+        response = requests.post(
+            url,
+            data=json.dumps(purchase),
+            headers={'content-type':'application/json'},
+            )
+
+        if response.status_code == 201:
+            print "success"
+            print response.json()
+
+
+
+
+
+
