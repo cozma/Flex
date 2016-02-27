@@ -58,7 +58,6 @@ def getAllPurchase():
     for account in accounts:
         if(account['type'] == 'Credit Card'):
             id = account['_id']
-            print id
             break
 
     urlToScrape = 'http://api.reimaginebanking.com/accounts/{}/purchases?key={}'.format(id,apiKey)
