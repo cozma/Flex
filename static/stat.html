@@ -299,84 +299,93 @@
 									case "fastFood": 
 									    if(fastFood.hasOwnProperty(data[i]['name'])){
 									    	var cost = fastFood['name']; 
-									    	fastFood[data[i]['name']]  = cost += data[i]['price']; 
+									    	fastFood[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											fastFood[data[i]['name']]  = data[i]['price']; 
 										}
 										populatedData[0] += Number(data[i]['price']);
+										break; 
 									case "fineDining": 
 									    if(fineDining.hasOwnProperty(data[i]['name'])){
 									    	var cost = fastFood['name']; 
-									    	fineDining[data[i]['name']]  = cost += data[i]['price']; 
+									    	fineDining[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											fineDining[data[i]['name']]  = data[i]['price']; 
 										}
 										populatedData[1] += Number(data[i]['price']);
+										break; 
 									case "apparelOnline":
 									    if(apparelOnline.hasOwnProperty(data[i]['name'])){
 									    	var cost = fastFood['name']; 
-									    	apparelOnline[data[i]['name']]  = cost += data[i]['price']; 
+									    	apparelOnline[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											apparelOnline[data[i]['name']]  = data[i]['price']; 
 										}
 										populatedData[2] += Number(data[i]['price']);
+										break; 
 									case "electronicsOnline": 
 									    if(electronicsOnline.hasOwnProperty(data[i]['name'])){
 									    	var cost = fastFood['name']; 
-									    	electronicsOnline[data[i]['name']]  = cost += data[i]['price']; 
+									    	electronicsOnline[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											electronicsOnline[data[i]['name']]  = data[i]['price']; 
 										}
 										populatedData[3] += Number(data[i]['price']);
+										break; 
 									case "merchandiseOnline": 
 									    if(merchandiseOnline.hasOwnProperty(data[i]['name'])){
 									    	var cost = fastFood['name']; 
-									    	merchandiseOnline[data[i]['name']]  = cost += data[i]['price']; 
+									    	merchandiseOnline[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											merchandiseOnline[data[i]['name']]  = data[i]['price']; 
 										}
 										populatedData[4] += Number(data[i]['price']);
+										break; 
 									case "homeGoodsOnline": 
 									    if(homeGoodsOnline.hasOwnProperty(data[i]['name'])){
 									    	var cost = fastFood['name']; 
-									    	homeGoodsOnline[data[i]['name']]  = cost += data[i]['price']; 
+									    	homeGoodsOnline[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											homeGoodsOnline[data[i]['name']]  = data[i]['price']; 
 										}
 										populatedData[5] += Number(data[i]['price']);
+										break; 
 									case "sportingGoodsOnline": 
 									    if(sportingGoodsOnline.hasOwnProperty(data[i]['name'])){
 									    	var cost = fastFood['name']; 
-									    	sportingGoodsOnline[data[i]['name']]  = cost += data[i]['price']; 
+									    	sportingGoodsOnline[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											sportingGoodsOnline[data[i]['name']]  = data[i]['price']; 
 										}
 										populatedData[6] += Number(data[i]['price']);
+										break; 
 									case "hardware": 
 									    if(hardware.hasOwnProperty(data[i]['name'])){
 									    	var cost = fastFood['name']; 
-									    	hardware[data[i]['name']]  = cost += data[i]['price']; 
+									    	hardware[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											hardware[data[i]['name']]  = data[i]['price']; 
 										}
 										populatedData[7] += Number(data[i]['price']);
+										break; 
 									case "apparel": 
 									    if(apparel.hasOwnProperty(data[i]['name'])){
 									    	var cost = fastFood['name']; 
-									    	apparel[data[i]['name']]  = cost += data[i]['price']; 
+									    	apparel[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											apparel[data[i]['name']]  = data[i]['price']; 
 										}
 										populatedData[8] += Number(data[i]['price']);
+										break; 
 							}
 						}
 
@@ -576,7 +585,7 @@
 									case "fastFood": 
 									    if(fastFood.hasOwnProperty(data[i]['name'])){
 									    	var cost = fastFood['name']; 
-									    	fastFood[data[i]['name']]  = cost += data[i]['price']; 
+									    	fastFood[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											fastFood[data[i]['name']]  = data[i]['price']; 
@@ -586,7 +595,7 @@
 									case "fineDining": 
 									    if(fineDining.hasOwnProperty(data[i]['name'])){
 									    	var cost = fastFood['name']; 
-									    	fineDining[data[i]['name']]  = cost += data[i]['price']; 
+									    	fineDining[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											fineDining[data[i]['name']]  = data[i]['price']; 
@@ -595,8 +604,8 @@
 										break; 
 									case "apparelOnline":
 									    if(apparelOnline.hasOwnProperty(data[i]['name'])){
-									    	var cost = fastFood['name']; 
-									    	apparelOnline[data[i]['name']]  = cost += data[i]['price']; 
+									    	var cost = apparelOnline['name']; 
+									    	apparelOnline[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											apparelOnline[data[i]['name']]  = data[i]['price']; 
@@ -605,8 +614,8 @@
 										break; 
 									case "electronicsOnline": 
 									    if(electronicsOnline.hasOwnProperty(data[i]['name'])){
-									    	var cost = fastFood['name']; 
-									    	electronicsOnline[data[i]['name']]  = cost += data[i]['price']; 
+									    	var cost = electronicsOnline['name']; 
+									    	electronicsOnline[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											electronicsOnline[data[i]['name']]  = data[i]['price']; 
@@ -615,8 +624,8 @@
 										break; 
 									case "merchandiseOnline": 
 									    if(merchandiseOnline.hasOwnProperty(data[i]['name'])){
-									    	var cost = fastFood['name']; 
-									    	merchandiseOnline[data[i]['name']]  = cost += data[i]['price']; 
+									    	var cost = merchandiseOnline['name']; 
+									    	merchandiseOnline[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											merchandiseOnline[data[i]['name']]  = data[i]['price']; 
@@ -625,8 +634,8 @@
 										break; 
 									case "homeGoodsOnline": 
 									    if(homeGoodsOnline.hasOwnProperty(data[i]['name'])){
-									    	var cost = fastFood['name']; 
-									    	homeGoodsOnline[data[i]['name']]  = cost += data[i]['price']; 
+									    	var cost = homeGoodsOnline['name']; 
+									    	homeGoodsOnline[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											homeGoodsOnline[data[i]['name']]  = data[i]['price']; 
@@ -635,8 +644,8 @@
 										break; 
 									case "sportingGoodsOnline": 
 									    if(sportingGoodsOnline.hasOwnProperty(data[i]['name'])){
-									    	var cost = fastFood['name']; 
-									    	sportingGoodsOnline[data[i]['name']]  = cost += data[i]['price']; 
+									    	var cost = sportingGoodsOnline['name']; 
+									    	sportingGoodsOnline[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											sportingGoodsOnline[data[i]['name']]  = data[i]['price']; 
@@ -645,8 +654,8 @@
 										break; 
 									case "hardware": 
 									    if(hardware.hasOwnProperty(data[i]['name'])){
-									    	var cost = fastFood['name']; 
-									    	hardware[data[i]['name']]  = cost += data[i]['price']; 
+									    	var cost = hardware['name']; 
+									    	hardware[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											hardware[data[i]['name']]  = data[i]['price']; 
@@ -655,8 +664,8 @@
 										break; 
 									case "apparel": 
 									    if(apparel.hasOwnProperty(data[i]['name'])){
-									    	var cost = fastFood['name']; 
-									    	apparel[data[i]['name']]  = cost += data[i]['price']; 
+									    	var cost = apparel['name']; 
+									    	apparel[data[i]['name']]  = cost + data[i]['price']; 
 										}
 										else {
 											apparel[data[i]['name']]  = data[i]['price']; 
