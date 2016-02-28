@@ -21,6 +21,7 @@ def sortAllPurchases(allPurchases):
     possibleCategories = list(set(possibleCategories))
     # Create mapping to categories "food", "online", or "retail"
     subcategoryMappingToCategory = {"fastFood":"food", \
+                                    "fineDining":"food", \
                                     "apparelOnline":"online", \
                                     "electronicsOnline":"online", \
                                     "generalMerchandiseOnline":"online", \
@@ -32,8 +33,9 @@ def sortAllPurchases(allPurchases):
     # Go through all purchases and sort them into the purchases global array variables
     for purchase in allPurchases:
         if purchase['description'] not in subcategoryMappingToCategory.keys():
-            print "ERROR cannot sort %s into a category. may need to add the subcategory mapping" % purchase['description']
-            exit(2)
+            # print "ERROR cannot sort %s into a category. may need to add the subcategory mapping" % purchase['description']
+            # print purchase
+            continue
         if (subcategoryMappingToCategory[purchase['description']] is "food"):
             global foodPurchases
             foodPurchases.append(purchase)
@@ -75,6 +77,50 @@ def getAllPurchase():
                           "price":con['amount'] })
 
     sortAllPurchases(retList)
+    return json.dumps(retList)
+
+
+
+def getNamesAndGIS():
+    accountsUrl = 'http://api.reimaginebanking.com/customers/{}/accounts?key={}'.format(customerId, apiKey)
+    response = requests.get(accountsUrl)
+    accounts = response.json()
+    id = ""
+    for account in accounts:
+        if(account['type'] == 'Credit Card'):
+            id = account['_id']
+            break
+    # Get all purchases
+    purchasesUrl = 'http://api.reimaginebanking.com/accounts/{}/purchases?key={}'.format(id,apiKey)
+    # Creates a purchase
+    response = requests.get(purchasesUrl)
+
+    # Get the merchant ids we need
+    merchantIds = []
+    for merch in response.json():
+        merchantIds.append(merch['merchant_id'])
+
+    # Get all merchants up in the cloud to compare to 
+    url = 'http://api.reimaginebanking.com/merchants?key={}'.format(apiKey)
+    response = requests.get(url)
+    allMerchants = response.json()
+
+    #filter the allMerchants to just the ones we want
+    newAllMerchants = []
+    for merch in allMerchants:
+        if merch['_id'] in merchantIds:
+            newAllMerchants.append(merch)
+    allMerchants = newAllMerchants
+
+    # filter out the ones that do not have the geotags
+    geotagsAndMerchants = {}
+    for merch in allMerchants:
+        if 'geocode' in merch:
+            geotagsAndMerchants[merch['name']] = [str(merch['geocode']['lat']), str(merch['geocode']['lng'])]
+    # Return a map of {name, [lat, long]}
+    print geotagsAndMerchants
+    return geotagsAndMerchants
+
 
 # getters for json data
 def getFood():
@@ -88,9 +134,9 @@ def getOnline():
     return json.dumps(onlinePurchases)
 
 
+
 # TEST The stuff from the stats.json file
 # with open('cache/stats.json') as data_file:
 #     allData = json.load(data_file)
 #     sortAllPurchases(allData)
 # print getFood()
-# getAllPurchase()
