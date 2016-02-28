@@ -60,8 +60,7 @@
 	<body scroll="no" scrolling="no">
 				<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>
 
-				<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	
-			<div></div>
+				<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	
 			<br>
 			<br>
 			<br>
@@ -102,10 +101,6 @@
 			</div> 
 			<br>
 
- 			<div id="map">
- 				
- 			</div>
- 			<br>
 
 			<div id='buttons' align="center">
 				<tr>
@@ -123,6 +118,13 @@
 			</div>
 	
 			<br>
+
+
+ 			<div id="map">
+ 				
+ 			</div>
+
+ 			<br>
 
 			<div id='titles' align="center">  
 				<div class="summarytable">
@@ -146,6 +148,7 @@
 
 
 
+
 		<!-- Scripts -->
 			<!-- [if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif] -->
 			<script src="assets/js/main.js"></script>
@@ -163,7 +166,18 @@
 
 
 
+			<script type="text/javascript">
+				var map = L.map('map').setView([37.2300, -80.4178], 13);
+				map.attributionControl = false;
+				map.scrollWheelZoom.disable();
 
+
+				L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+
+				L.marker([37.2300, -80.4178]).addTo(map);
+
+
+			</script>
 
 			<script type="text/javascript">
 				$('a.show').on('click', function () {
