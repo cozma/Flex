@@ -21,6 +21,7 @@ def sortAllPurchases(allPurchases):
     possibleCategories = list(set(possibleCategories))
     # Create mapping to categories "food", "online", or "retail"
     subcategoryMappingToCategory = {"fastFood":"food", \
+                                    "fineDining":"food", \
                                     "apparelOnline":"online", \
                                     "electronicsOnline":"online", \
                                     "generalMerchandiseOnline":"online", \
