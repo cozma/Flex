@@ -33,8 +33,9 @@ def sortAllPurchases(allPurchases):
     # Go through all purchases and sort them into the purchases global array variables
     for purchase in allPurchases:
         if purchase['description'] not in subcategoryMappingToCategory.keys():
-            print "ERROR cannot sort %s into a category. may need to add the subcategory mapping" % purchase['description']
-            exit(2)
+            # print "ERROR cannot sort %s into a category. may need to add the subcategory mapping" % purchase['description']
+            # print purchase
+            continue
         if (subcategoryMappingToCategory[purchase['description']] is "food"):
             global foodPurchases
             foodPurchases.append(purchase)
@@ -94,4 +95,3 @@ def getOnline():
 #     allData = json.load(data_file)
 #     sortAllPurchases(allData)
 # print getFood()
-# getAllPurchase()

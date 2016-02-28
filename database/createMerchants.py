@@ -29,9 +29,9 @@ def getIdForMerchant(name):
   return None
 
 
-def chargeToAccount(accountID, amountToCharge, payeeID):
+def chargeToAccount(accountID, amountToCharge, payeeID, description):
   purchaseurl = 'http://api.reimaginebanking.com/accounts/' + accountID + '/purchases?key=' + apiKey
-  purchase = {"merchant_id": payeeID,"medium": "balance","purchase_date": "2016-02-27","amount": amountToCharge,"status": "pending","description": "string"}
+  purchase = {"merchant_id": payeeID,"medium": "balance","purchase_date": "2016-02-27","amount": amountToCharge,"status": "pending","description": description}
   response = requests.post(
     purchaseurl,
     data=json.dumps(purchase),
@@ -58,28 +58,41 @@ def createMerchant(name, category, lat, lng):
       print "could not create " + name
       print response.status_code
 
+# Updating is denied in response from api ??!?!
+def updateCharge(chargeID, description):
+  purchaseurl = 'http://api.reimaginebanking.com/purchases/' + chargeID + '?key=' + apiKey
+  # purchase = {"merchant_id": payeeID,"medium": "balance","purchase_date": "2016-02-27","amount": amountToCharge,"status": "pending","description": "string"}
+  purchase = {"description": description}
+  response = requests.put(
+    purchaseurl,
+    data=json.dumps(purchase),
+    headers={'content-type':'application/json', 'Accept': 'application/json'},
+  )
+  print(response)
+  print response.json()
+
+# updateCharge("56d23ddb480cf02f0f889e76", "apparel")
+
 ## Temp add merchants
 # createMerchant("Souvlaki's", "fineDining", "37.229814", "-80.416221")
 # createMerchant("The Cellar Restaurant", "fineDining", "37.230918", "-80.414981")
 # createMerchant("Mellow Mushroom", "fineDining", "37.228198", "-80.412458")
 
-
 # createMerchant("Heavener True Value", "hardware", "37.236061", "-80.421704")
 # createMerchant("Clothes Rack", "apparel", "37.229383", "-80.414092")
 # createMerchant("Alligator Alley", "apparel", "37.227199", "-80.411496")
 
-
-# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Alligator Alley"))
-# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Sharkey's"))
-# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Souvlaki's"))
-# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("The Cellar Restaurant"))
-# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Mellow Mushroom"))
-# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("622 North Restaurant"))
-# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Marco & Luca"))
-# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Cabo Fish Taco"))
-# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Himilayan Curry Cafe"))
-# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Heavener True Value"))
-# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Clothes Rack"))
+# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Alligator Alley"), "apparel")
+# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Sharkey's"), "fineDining")
+# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Souvlaki's"), "fineDining")
+# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("The Cellar Restaurant"), "fineDining")
+# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Mellow Mushroom"), "fineDining")
+# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("622 North Restaurant"), "fineDining")
+# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Marco & Luca"), "fineDining")
+# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Cabo Fish Taco"), "fineDining")
+# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Himilayan Curry Cafe"), "fineDining")
+# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Heavener True Value"), "hardware")
+# chargeToAccount(getAccountID(), random.random() * 500, getIdForMerchant("Clothes Rack"), "apparel")
 
 
 
