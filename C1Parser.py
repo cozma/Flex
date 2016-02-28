@@ -78,6 +78,48 @@ def getAllPurchase():
 
     sortAllPurchases(retList)
 
+
+def getNamesAndGIS():
+    accountsUrl = 'http://api.reimaginebanking.com/customers/{}/accounts?key={}'.format(customerId, apiKey)
+    response = requests.get(accountsUrl)
+    accounts = response.json()
+    id = ""
+    for account in accounts:
+        if(account['type'] == 'Credit Card'):
+            id = account['_id']
+            break
+    # Get all purchases
+    purchasesUrl = 'http://api.reimaginebanking.com/accounts/{}/purchases?key={}'.format(id,apiKey)
+    # Creates a purchase
+    response = requests.get(purchasesUrl)
+
+    # Get the merchant ids we need
+    merchantIds = []
+    for merch in response.json():
+        merchantIds.append(merch['merchant_id'])
+
+    # Get all merchants up in the cloud to compare to 
+    url = 'http://api.reimaginebanking.com/merchants?key={}'.format(apiKey)
+    response = requests.get(url)
+    allMerchants = response.json()
+
+    #filter the allMerchants to just the ones we want
+    newAllMerchants = []
+    for merch in allMerchants:
+        if merch['_id'] in merchantIds:
+            newAllMerchants.append(merch)
+    allMerchants = newAllMerchants
+
+    # filter out the ones that do not have the geotags
+    geotagsAndMerchants = {}
+    for merch in allMerchants:
+        if 'geocode' in merch:
+            geotagsAndMerchants[merch['name']] = [str(merch['geocode']['lat']), str(merch['geocode']['lng'])]
+    # Return a map of {name, [lat, long]}
+    print geotagsAndMerchants
+    return geotagsAndMerchants
+
+
 # getters for json data
 def getFood():
     getAllPurchase()
@@ -88,6 +130,7 @@ def getRetail():
 def getOnline():
     getAllPurchase()
     return json.dumps(onlinePurchases)
+
 
 
 # TEST The stuff from the stats.json file
