@@ -95,4 +95,3 @@ def getOnline():
 #     allData = json.load(data_file)
 #     sortAllPurchases(allData)
 # print getFood()
-getAllPurchase()
