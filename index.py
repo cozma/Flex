@@ -22,7 +22,7 @@ def login():
 @app.route('/refresh_purchases', methods=['GET'])
 def refresh_purchases():
  	ret = getAllPurchase()
- 	f = open("cache/purchases.json", 'r+')
+ 	f = open("cache/purchases.json", 'w+')
 	f.seek(0)
 	f.write(ret)
 	f.truncate()
@@ -33,7 +33,7 @@ def refresh_purchases():
 @app.route('/refresh_food', methods=['GET'])
 def refresh_food():
  	ret = getFood()
- 	f = open("cache/food.json", 'r+')
+ 	f = open("cache/food.json", 'w+')
 	f.seek(0)
 	f.write(ret)
 	f.truncate()
@@ -43,7 +43,7 @@ def refresh_food():
 @app.route('/refresh_retail', methods=['GET'])
 def refresh_retail():
  	ret = getRetail()
- 	f = open("cache/retail.json", 'r+')
+ 	f = open("cache/retail.json", 'w+')
 	f.seek(0)
 	f.write(ret)
 	f.truncate()
@@ -53,7 +53,7 @@ def refresh_retail():
 @app.route('/refresh_online', methods=['GET'])
 def refresh_online():
  	ret = getOnline()
- 	f = open("cache/online.json", 'r+')
+ 	f = open("cache/online.json", 'w+')
 	f.seek(0)
 	f.write(ret)
 	f.truncate()

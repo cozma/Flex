@@ -77,6 +77,8 @@ def getAllPurchase():
                           "price":con['amount'] })
 
     sortAllPurchases(retList)
+    return json.dumps(retList)
+
 
 # getters for json data
 def getFood():
