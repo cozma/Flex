@@ -1,7 +1,7 @@
 from flask import Flask, send_from_directory, request, redirect, url_for
 import sys
 import os
-from C1Parser import getAllPurchase, getFood, getRetail, getOnline
+from C1Parser import getAllPurchase, getFood, getRetail, getOnline, getNamesAndGIS
 app = Flask(__name__, static_url_path='')
 
 @app.route('/')
@@ -60,6 +60,17 @@ def refresh_online():
 	f.close()
 	return ret
 
+@app.route('/refresh_gis', methods=['GET'])
+def refresh_gis():
+	ret = getNamesAndGIS()
+ 	f = open("cache/gis.json", 'w+')
+	f.seek(0)
+	f.write(ret)
+	f.truncate()
+	f.close()
+	return ret
+
+
 @app.route('/purchases', methods=['GET'])
 def get_purchases():
 	ret = ""
@@ -92,6 +103,13 @@ def get_online():
 			ret = ret+line
 	return ret
 
+@app.route('/gis', methods=['GET'])
+def get_gis():
+	ret = ""
+	with open("cache/gis.json", 'r') as file:
+		for line in file:
+			ret = ret+line
+	return ret
 
 @app.route('/<path:path>')
 def static_proxy(path):

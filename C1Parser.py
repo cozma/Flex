@@ -117,9 +117,8 @@ def getNamesAndGIS():
     for merch in allMerchants:
         if 'geocode' in merch:
             geotagsAndMerchants[merch['name']] = [str(merch['geocode']['lat']), str(merch['geocode']['lng'])]
-    # Return a map of {name, [lat, long]}
-    print geotagsAndMerchants
-    return geotagsAndMerchants
+    # Return a map of {name: [lat, long]}
+    return json.dumps(geotagsAndMerchants)
 
 
 # getters for json data

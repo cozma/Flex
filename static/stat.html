@@ -167,14 +167,18 @@
 
 
 			<script type="text/javascript">
-				var map = L.map('map').setView([37.2300, -80.4178], 13);
+			$.getJSON('/gis', function(data){
+				var map = L.map('map').setView([37.2300, -80.4178], 15);
 				map.attributionControl = false;
 				map.scrollWheelZoom.disable();
-
-
 				L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+				// L.marker([37.2300, -80.4178]).addTo(map);
 
-				L.marker([37.2300, -80.4178]).addTo(map);
+				$.each(data, function(i, item){
+				
+					L.marker(item).addTo(map).bindPopup("<p style='color:black'>"+String(i)+"</p>");
+				});
+			});
 
 
 			</script>
@@ -200,10 +204,10 @@
 				var url = "/refresh_retail";
 				xmlhttp.open("GET", url, true);
 				xmlhttp.send();
-			</script>
+			</script> 
 			<script>
 				var xmlhttp = new XMLHttpRequest();
-				var url = "/refresh_online";
+				var url = "/refresh_gis";
 				xmlhttp.open("GET", url, true);
 				xmlhttp.send();
 			</script> -->
