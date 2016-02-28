@@ -58,21 +58,38 @@
 			</header><br>
 
 	<body scroll="no" scrolling="no">
+
 				<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>
 
-				<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	
-			<br>
+				<br>	<br>	<br>	<br>	<br>	<br>	
 			<br>
 			<br>
 			<div id="user" align="center">
-				<h1><i class="fa fa-user"></i> Welcome, Julie</h1>
+				<h1><i class="fa fa-user"></i> Welcome, Julie</h1></br>
+				<p>Understand Your Spending</p>
+
 			</div>
 			<br>
 
 
+ 			<div id="map">
+ 				
+ 			</div>
 
-			</div>
-			<br> 
+ 			<br>
+
+ 			<div id="spoiler"> 
+
+				<a class="show"><img id="close" src="images/x.png"></a>
+<!-- 
+				onclick="close(); if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}" -->
+
+				You spent $<span id="total"></span> last pay cycle.  Check out where you can save more.
+			</div> 
+
+			<br id="hide_me">
+
+
 
 			<div id='dashboard' align="center" style="">
 				<table style="width:100%">
@@ -89,17 +106,6 @@
 				
 			</div> 
 			</br>
-
-
-			<div id="spoiler"> 
-
-				<a class="show"><img id="close" src="images/x.png"></a>
-<!-- 
-				onclick="close(); if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}" -->
-
-				<p id="tip">You could be saving $500.00 a month if you don't eat out!</p>
-			</div> 
-			<br>
 
 
 			<div id='buttons' align="center">
@@ -119,12 +125,6 @@
 	
 			<br>
 
-
- 			<div id="map">
- 				
- 			</div>
-
- 			<br>
 
 			<div id='titles' align="center">  
 				<div class="summarytable">
@@ -182,8 +182,12 @@
 			<script type="text/javascript">
 				$('a.show').on('click', function () {
 				    $('#spoiler').toggle("slide", { direction: "left" }, 1000);
+				    $('#hide_me').toggle("slide", { direction: "left" }, 1000);
+
 				});
 			</script>
+
+
 
 <!-- 			<script>
 				var xmlhttp = new XMLHttpRequest();
@@ -394,9 +398,11 @@
 					$.getJSON('/purchases', function(data) {
 
 					$('#mytable tr').remove();
-
+					var total = 0;
     
         					$.each(data, function(i, item) {
+        							total += parseInt(item.price);
+
 		    					$row = $('<tr></tr>');
 		    					$row.append('<td>' + item.name.charAt(0).toUpperCase() + item.name.slice(1) + '</td>');
 							$row.append('<td>' + "$" + parseInt(item.price).toFixed(2) + '</td>');
@@ -406,6 +412,9 @@
 
 							$('#mytable').append($row);
 					})
+
+        					$('#total').append(total);
+
 
 					});
 
@@ -443,11 +452,11 @@
 
 				<!-- Footer -->
 			<footer id="footer">
-				<ul class="icons">
+<!-- 				<ul class="icons">
 					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 					<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
 					<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-				</ul>
+				</ul> -->
 				<ul class="copyright">
 					<li>&copy; flex <br>Made with <i class="fa fa-heart"></i> at VT Hacks III </li><li><br>John Purviance | Jayanth Prathipati | Oliver Ebeling-Koning | Dag Yeshiwas</li>
 				</ul>
