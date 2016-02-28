@@ -61,7 +61,7 @@
 
 				<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>
 
-				<br>	<br>	<br>	<br>	<br>	<br>	
+				<br>	<br>	<br>	<br>	<br>	<br> <br> <br>
 			<br>
 			<br>
 			<div id="user" align="center">
@@ -95,11 +95,15 @@
 				<table style="width:100%">
 					<tr> 
 						<td> 
-							<canvas id="myChart" width="400" height="400"></canvas>
+							<div style="max-width: 400px;">
+								<canvas id="myChart" width="400" height="400" style="float: left;"></canvas>
+							</div>
+							
 						</td>
 						<td> 
-							<!-- <canvas id="myChart1" width="400" height="400"></canvas> -->
-
+							<div style="max-width: 400px;">
+								<canvas id="myChart1" width="400" height="400" style="float: left;"></canvas>
+							</div>
 						</td>  
 					</tr>
 				</table>
@@ -248,30 +252,104 @@
 				// 	var ctx = $("#myChart").get(0).getContext("2d");
 				// 	// This will get the first returned node in the jQuery collection.
 				// }
-
+				function getRandomIntInclusive(min, max) {
+  					return Math.floor(Math.random() * (max - min + 1)) + min;
+				}
 
 					var populatedData = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+					var fastFood = {};
+					var fineDining = {};
+					var apparelOnline = {};
+					var electronicsOnline = {};
+					var merchandiseOnline = {};
+					var homeGoodsOnline = {};
+					var sportingGoodsOnline = {};
+					var hardware = {};
+					var apparel = {};
  
 					$.getJSON('/purchases', function(data) {
 						for(i = 0; i < data.length; i++) {
 								switch(data[i]['description']) {
 									case "fastFood": 
+									    if(fastFood.hasOwnProperty(data[i]['name'])){
+									    	var cost = fastFood['name']; 
+									    	fastFood[data[i]['name']]  = cost += data[i]['price']; 
+										}
+										else {
+											fastFood[data[i]['name']]  = data[i]['price']; 
+										}
 										populatedData[0] += Number(data[i]['price']);
 									case "fineDining": 
+									    if(fineDining.hasOwnProperty(data[i]['name'])){
+									    	var cost = fastFood['name']; 
+									    	fineDining[data[i]['name']]  = cost += data[i]['price']; 
+										}
+										else {
+											fineDining[data[i]['name']]  = data[i]['price']; 
+										}
 										populatedData[1] += Number(data[i]['price']);
-									case "apparelOnline": 
+									case "apparelOnline":
+									    if(apparelOnline.hasOwnProperty(data[i]['name'])){
+									    	var cost = fastFood['name']; 
+									    	apparelOnline[data[i]['name']]  = cost += data[i]['price']; 
+										}
+										else {
+											apparelOnline[data[i]['name']]  = data[i]['price']; 
+										}
 										populatedData[2] += Number(data[i]['price']);
 									case "electronicsOnline": 
+									    if(electronicsOnline.hasOwnProperty(data[i]['name'])){
+									    	var cost = fastFood['name']; 
+									    	electronicsOnline[data[i]['name']]  = cost += data[i]['price']; 
+										}
+										else {
+											electronicsOnline[data[i]['name']]  = data[i]['price']; 
+										}
 										populatedData[3] += Number(data[i]['price']);
-									case "electronicsOnline": 
+									case "merchandiseOnline": 
+									    if(merchandiseOnline.hasOwnProperty(data[i]['name'])){
+									    	var cost = fastFood['name']; 
+									    	merchandiseOnline[data[i]['name']]  = cost += data[i]['price']; 
+										}
+										else {
+											merchandiseOnline[data[i]['name']]  = data[i]['price']; 
+										}
 										populatedData[4] += Number(data[i]['price']);
 									case "homeGoodsOnline": 
+									    if(homeGoodsOnline.hasOwnProperty(data[i]['name'])){
+									    	var cost = fastFood['name']; 
+									    	homeGoodsOnline[data[i]['name']]  = cost += data[i]['price']; 
+										}
+										else {
+											homeGoodsOnline[data[i]['name']]  = data[i]['price']; 
+										}
 										populatedData[5] += Number(data[i]['price']);
 									case "sportingGoodsOnline": 
+									    if(sportingGoodsOnline.hasOwnProperty(data[i]['name'])){
+									    	var cost = fastFood['name']; 
+									    	sportingGoodsOnline[data[i]['name']]  = cost += data[i]['price']; 
+										}
+										else {
+											sportingGoodsOnline[data[i]['name']]  = data[i]['price']; 
+										}
 										populatedData[6] += Number(data[i]['price']);
 									case "hardware": 
+									    if(hardware.hasOwnProperty(data[i]['name'])){
+									    	var cost = fastFood['name']; 
+									    	hardware[data[i]['name']]  = cost += data[i]['price']; 
+										}
+										else {
+											hardware[data[i]['name']]  = data[i]['price']; 
+										}
 										populatedData[7] += Number(data[i]['price']);
 									case "apparel": 
+									    if(apparel.hasOwnProperty(data[i]['name'])){
+									    	var cost = fastFood['name']; 
+									    	apparel[data[i]['name']]  = cost += data[i]['price']; 
+										}
+										else {
+											apparel[data[i]['name']]  = data[i]['price']; 
+										}
 										populatedData[8] += Number(data[i]['price']);
 							}
 						}
@@ -285,8 +363,31 @@
 						populatedData[i] = populatedData[i].toFixed(2) * 10; 
 					}
 
+					var keysToGet = Object.keys(apparel);
+					var keys = []
+					var values = []
+					for(i = 0; i < 10; i++) {
+						var index = getRandomIntInclusive(0, keysToGet.length); 
+						if(apparel[keysToGet[index]] == 'undefined') {
+							console.log(apparel[keysToGet[index]] ); 
+						}
+						else if(isNaN(apparel[keysToGet[index]])) {
+							index = getRandomIntInclusive(0, keysToGet.length); 
+						}
+						// if(!isNaN(apparel[keys[index]]) && ) {
+						// 	console.log("Tjis is running"); 
+						// 	index = getRandomIntInclusive(0, keysToGet.length);
+						// }
+						keys.push(keysToGet[index]); 
+						// console.log("This is the value" + apparel[keys[index]]); 
+						values.push(apparel[keysToGet[index]].toFixed(2)); 
+
+					} 
+
+				 	
+
 					var data = {
-					    labels: ["Fast Food", "Fine Dining", "Online Apparel", "Online Electronics", "Online Merchandise", "Online Home Goods", "Online Sporting Goods", "Computer Hardware", "Apparel"],
+					    labels: ["Fast 	Food", "Fine Dining", "Online Apparel", "Online Electronics", "Online Merchandise", "Online Home Goods", "Online Sporting Goods", "Computer Hardware", "Apparel"],
 					    datasets: [
 					        {
 					            label: "My Expenditures",
@@ -313,6 +414,7 @@
 
 					    // Boolean - Whether the scale should begin at zero
 					    scaleBeginAtZero : true,
+					    scaleFontColor: "#fff",
 
 					    //String - Colour of the angle line
 					    angleLineColor : "rgba(220,220,220,0.2)",
@@ -357,20 +459,64 @@
 					    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
 					}; 
 
+
+					var data1 = {
+							    labels: keys,
+							    datasets: [
+							        {
+							            label: "Purchases",
+							            fillColor: "rgba(220,220,220,0.5)",
+							            strokeColor: "#fff",
+							            highlightFill: "#fff",
+							            highlightStroke: "#fff",
+							            data: values
+							        }
+							    ]
+							};
+
+					var options1 = {
+						    //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+						    scaleBeginAtZero : true,
+
+						    //Boolean - Whether grid lines are shown across the chart
+						    scaleShowGridLines : true,
+
+						    //String - Colour of the grid lines
+						    scaleGridLineColor : "rgba(0,0,0,.05)",
+
+						    //Number - Width of the grid lines
+						    scaleGridLineWidth : 1,
+						    scaleFontColor: "#fff",
+
+						    //Boolean - Whether to show horizontal lines (except X axis)
+						    scaleShowHorizontalLines: true,
+
+						    //Boolean - Whether to show vertical lines (except Y axis)
+						    scaleShowVerticalLines: true,
+
+						    //Boolean - If there is a stroke on each bar
+						    barShowStroke : true,
+
+						    //Number - Pixel width of the bar stroke
+						    barStrokeWidth : 2,
+
+						    //Number - Spacing between each of the X value sets
+						    barValueSpacing : 5,
+
+						    //Number - Spacing between data sets within X values
+						    barDatasetSpacing : 1,
+
+						    //String - A legend template
+						    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+						};
+
 				// Get context with jQuery - using jQuery's .get() method.
 				var ctx = $("#myChart").get(0).getContext("2d");
+				var ctx1 = $("#myChart1").get(0).getContext("2d");
 				var myNewChart = new Chart(ctx).Radar(data, options);
+				var myBarChart = new Chart(ctx1).Bar(data1, options1);
 					}); 
-
-				// canvas.onclick = function(evt){
-				// 	    var activePoints = myLineChart.getPointsAtEvent(evt);
-				// 	    // => activePoints is an array of points on the canvas that are at the same position as the click event.
-				// 	    console.log("Hello")
-				// 	};
-
-
-
-
+				
 
 			</script>
 
@@ -379,19 +525,108 @@
 
 					$.getJSON('/purchases', function(data) {
 
+
+					var fastFood = {};
+					var fineDining = {};
+					var apparelOnline = {};
+					var electronicsOnline = {};
+					var merchandiseOnline = {};
+					var homeGoodsOnline = {};
+					var sportingGoodsOnline = {};
+					var hardware = {};
+					var apparel = {};
+					for(i = 0; i < data.length; i++) {
+							switch(data[i]['description']) {
+								case "fastFood": 
+								    if(fastFood.hasOwnProperty(data[i]['name'])){
+								    	var cost = fastFood['name']; 
+								    	fastFood[data[i]['name']]  = cost += data[i]['price']; 
+									}
+									else {
+										fastFood[data[i]['name']]  = data[i]['price']; 
+									}
+								case "fineDining": 
+								    if(fineDining.hasOwnProperty(data[i]['name'])){
+								    	var cost = fastFood['name']; 
+								    	fineDining[data[i]['name']]  = cost += data[i]['price']; 
+									}
+									else {
+										fineDining[data[i]['name']]  = data[i]['price']; 
+									}
+								case "apparelOnline":
+								    if(apparelOnline.hasOwnProperty(data[i]['name'])){
+								    	var cost = fastFood['name']; 
+								    	apparelOnline[data[i]['name']]  = cost += data[i]['price']; 
+									}
+									else {
+										apparelOnline[data[i]['name']]  = data[i]['price']; 
+									}
+								case "electronicsOnline": 
+								    if(electronicsOnline.hasOwnProperty(data[i]['name'])){
+								    	var cost = fastFood['name']; 
+								    	electronicsOnline[data[i]['name']]  = cost += data[i]['price']; 
+									}
+									else {
+										electronicsOnline[data[i]['name']]  = data[i]['price']; 
+									}
+								case "merchandiseOnline": 
+								    if(merchandiseOnline.hasOwnProperty(data[i]['name'])){
+								    	var cost = fastFood['name']; 
+								    	merchandiseOnline[data[i]['name']]  = cost += data[i]['price']; 
+									}
+									else {
+										merchandiseOnline[data[i]['name']]  = data[i]['price']; 
+									}
+								case "homeGoodsOnline": 
+								    if(homeGoodsOnline.hasOwnProperty(data[i]['name'])){
+								    	var cost = fastFood['name']; 
+								    	homeGoodsOnline[data[i]['name']]  = cost += data[i]['price']; 
+									}
+									else {
+										homeGoodsOnline[data[i]['name']]  = data[i]['price']; 
+									}
+								case "sportingGoodsOnline": 
+								    if(sportingGoodsOnline.hasOwnProperty(data[i]['name'])){
+								    	var cost = fastFood['name']; 
+								    	sportingGoodsOnline[data[i]['name']]  = cost += data[i]['price']; 
+									}
+									else {
+										sportingGoodsOnline[data[i]['name']]  = data[i]['price']; 
+									}
+								case "hardware": 
+								    if(hardware.hasOwnProperty(data[i]['name'])){
+								    	var cost = fastFood['name']; 
+								    	hardware[data[i]['name']]  = cost += data[i]['price']; 
+									}
+									else {
+										hardware[data[i]['name']]  = data[i]['price']; 
+									}
+								case "apparel": 
+								    if(apparel.hasOwnProperty(data[i]['name'])){
+								    	var cost = fastFood['name']; 
+								    	apparel[data[i]['name']]  = cost += data[i]['price']; 
+									}
+									else {
+										apparel[data[i]['name']]  = data[i]['price']; 
+									}
+						}
+					}
+
 					$('#mytable tr').remove();
 
-    
-        					$.each(data, function(i, item) {
+					var ctx1 = $("#myChart1").get(0).getContext("2d");
+					var myBarChart = new Chart(ctx1).Bar(data1, options1);
+					}); 
+					myBarChart.removeData();
+
+        			$.each(data, function(i, item) {
         						if (item.description == cat){
-		    					$row = $('<tr></tr>');
-		    					$row.append('<td>' + item.name.charAt(0).toUpperCase() + item.name.slice(1) + '</td>');
-							$row.append('<td>' + "$" + parseInt(item.price).toFixed(2) + '</td>');
-							$row.append('<td>' + new Date(item.date) + '</td>');
-
-							// repeat the above line for each data item
-
-							$('#mytable').append($row);
+			    					$row = $('<tr></tr>');
+			    					$row.append('<td>' + item.name.charAt(0).toUpperCase() + item.name.slice(1) + '</td>');
+									$row.append('<td>' + "$" + parseInt(item.price).toFixed(2) + '</td>');
+									$row.append('<td>' + new Date(item.date) + '</td>');
+									// repeat the above line for each data item
+									$('#mytable').append($row);
 						}
 					})
 
@@ -449,6 +684,8 @@
 
     					// convC1Data("#dashboard", food, online, retail)
 				});
+
+
 
 			</script>
 
